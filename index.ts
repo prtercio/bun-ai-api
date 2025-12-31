@@ -21,7 +21,7 @@ function getNextService() {
 }
 
 const server = Bun.serve({
-  port: process.env.PORT ?? 3000,
+  port: process.env.PORT ?? 3005,
   async fetch(req) {
     const { pathname } = new URL(req.url)
 

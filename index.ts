@@ -28,7 +28,7 @@ function getNextService() {
 
 // Headers de CORS comunes
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',  // Cambia a '*' para testing, pero usa el origen específico en prod
+  'Access-Control-Allow-Origin': 'https://demo.avisus.com.br',  // Cambia a '*' para testing, pero usa el origen específico en prod
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
 };

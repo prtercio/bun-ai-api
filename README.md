@@ -338,3 +338,71 @@ bun install
 # Reiniciar servicio
 sudo systemctl start bun-ai-api
 ```
+
+## Configuracion NGINX:
+
+- Vamos a manejar el CORS por el NGINX
+- Eliminar o certificado que debe ser generado por comando
+
+```
+server {
+    server_name api.ia.btec.com.mx;
+
+    # Logs
+    access_log /var/log/nginx/api.ia.btec.com.mx.access.log;
+    error_log /var/log/nginx/api.ia.btec.com.mx.error.log;
+
+    # Proxy a la aplicación Bun
+    location / {
+        proxy_pass http://localhost:3005;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+
+        # === CORS ===
+        set $cors_origin "https://demo.avisus.com.br";
+
+    add_header Access-Control-Allow-Origin $cors_origin always;
+    add_header Access-Control-Allow-Methods "POST, OPTIONS" always;
+    add_header Access-Control-Allow-Headers "Content-Type" always;
+
+    if ($request_method = OPTIONS) {
+        add_header Access-Control-Allow-Origin $cors_origin always;
+        add_header Access-Control-Allow-Methods "POST, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "Content-Type" always;
+        add_header Access-Control-Max-Age 86400 always;
+        add_header Content-Length 0;
+        return 204;
+    }
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/api.ia.btec.com.mx/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/api.ia.btec.com.mx/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = api.ia.btec.com.mx) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name api.ia.btec.com.mx;
+    return 404; # managed by Certbot
+
+
+}
+```

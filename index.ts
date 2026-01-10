@@ -26,6 +26,13 @@ function getNextService() {
   return service;
 }
 
+// Headers de CORS comunes
+const corsHeaders = {
+  'Access-Control-Allow-Origin': 'https://demo.avisus.com.br',  // Cambia a '*' para testing, pero usa el origen específico en prod
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
 const server = Bun.serve({
   port: process.env.PORT ?? 3005,
   async fetch(req) {
@@ -43,6 +50,7 @@ const server = Bun.serve({
           'Content-Type': 'text/event-stream',
           'Cache-Control': 'no-cache',
           'Connection': 'keep-alive',
+          ...corsHeaders,
         },
       });
     }

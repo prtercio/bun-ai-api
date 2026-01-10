@@ -39,6 +39,7 @@ const server = Bun.serve({
     const { pathname } = new URL(req.url)
 
     if (req.method === 'POST' && pathname === '/chat') {
+      console.log('Handling OPTIONS preflight request');
       const { messages } = await req.json() as { messages: ChatMessage[] };
       const service = getNextService();
 

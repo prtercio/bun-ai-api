@@ -10,7 +10,7 @@ export const cerebrasZeService: AIService = {
   async chat(messages: ChatMessage[]) {
     const stream = await cerebras.chat.completions.create({
       messages: messages as any,
-      model: 'zai-glm-4.6',
+      model: 'zai-glm-4.7',
       stream: true,
       max_completion_tokens: 40960,
       temperature: 0.6,

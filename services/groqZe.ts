@@ -10,7 +10,7 @@ export const groqZeService: AIService = {
   async chat(messages: ChatMessage[]) {
     const chatCompletion = await groqZe.chat.completions.create({
       messages,
-      model: "moonshotai/kimi-k2-instruct-0905",
+      model: "groq/compound",
       temperature: 0.6,
       max_completion_tokens: 4096,
       top_p: 1,

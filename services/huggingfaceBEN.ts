@@ -3,7 +3,7 @@ import type { AIService, ChatMessage } from '../types';
 
 const openai = new OpenAI({
 	baseURL: "https://router.huggingface.co/v1",
-	apiKey: process.env.HF_TOKEN,
+	apiKey: process.env.HF_TOKENBEN,
 });
 
 /* Models available:
@@ -12,12 +12,12 @@ zai-org/GLM-4.7-Flash:novita
 meta-llama/Llama-3.1-8B-Instruct:novita
 */
 
-export const huggingfaceZeService: AIService = {
-    name: 'HuggingFaceZe',
+export const huggingfaceBENService: AIService = {
+    name: 'HuggingFaceBEN',
     async chat(messages: ChatMessage[]) {
         const stream = await openai.chat.completions.create({
             messages: messages as any,
-            model: 'meta-llama/Llama-3.1-8B-Instruct:novita',
+            model: 'zai-org/GLM-4.7-Flash:novita',
             stream: true,
             max_tokens: 1024,
             temperature: 0.1,

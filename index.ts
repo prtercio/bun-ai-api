@@ -7,9 +7,11 @@ import { groqZeService } from './services/groqZe';
 import { cohereService } from './services/cohere';
 import type { AIService, ChatMessage } from './types';
 import { googleService } from './services/google';
+import { huggingfaceZeService } from './services/huggingfaceZe';
 
 
 const services: AIService[] = [
+  huggingfaceZeService,
   googleService,
   groqService,
   groqZeService,

@@ -4,11 +4,13 @@ import { cerebrasZeService } from './services/cerebrasZE';
 import { openrouterService } from './services/openrouter';
 import { openrouterZeService } from './services/openrouterZe';
 import { groqZeService } from './services/groqZe';
+import { cohereService } from './services/cohere';
 import type { AIService, ChatMessage } from './types';
 import { googleService } from './services/google';
 
 
 const services: AIService[] = [
+  cohereService,
   googleService,
   groqService,
   groqZeService,

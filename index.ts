@@ -10,7 +10,6 @@ import { googleService } from './services/google';
 
 
 const services: AIService[] = [
-  cohereService,
   googleService,
   groqService,
   groqZeService,

@@ -8,9 +8,9 @@ export const groqService: AIService = {
   async chat(messages: ChatMessage[]) {
     const chatCompletion = await groq.chat.completions.create({
       messages,
-      model: "groq/compound",
-      temperature: 0.6,
-      max_completion_tokens: 4096,
+      model: "llama-3.1-8b-instant",
+      temperature: 0.1,
+      max_completion_tokens: 1024,
       top_p: 1,
       stream: true,
       stop: null

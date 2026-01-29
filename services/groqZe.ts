@@ -10,9 +10,9 @@ export const groqZeService: AIService = {
   async chat(messages: ChatMessage[]) {
     const chatCompletion = await groqZe.chat.completions.create({
       messages,
-      model: "groq/compound",
-      temperature: 0.6,
-      max_completion_tokens: 4096,
+      model: "qwen/qwen3-32b",
+      temperature: 0.1,
+      max_completion_tokens: 1024,
       top_p: 1,
       stream: true,
       stop: null
